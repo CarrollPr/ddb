@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DISCORD BOT VIP ACTIVATOR</title>
+    <title>Carroll Project | Discord Developer Badge</title>
     <style>
         * {
             margin: 0;
@@ -11,157 +11,194 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', sans-serif;
         }
-        
+
         body {
-            background: #1a1a1a;
-            color: #fff;
+            background: linear-gradient(135deg, rgba(30,30,30,1) 0%, rgba(45,45,45,1) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            color: white;
+            backdrop-filter: blur(10px);
         }
-        
+
         .container {
-            background: #2b2b2b;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             padding: 30px;
             width: 100%;
             max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            border: 1px solid #444;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            animation: fadeIn 0.5s ease-in-out;
         }
-        
+
         h1 {
-            color: #7289da;
+            color: #ffffff;
             text-align: center;
             margin-bottom: 20px;
             font-size: 24px;
         }
-        
+
         .input-group {
             display: flex;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
-        
+
         #botToken {
             flex: 1;
             padding: 12px;
             border: none;
-            border-radius: 6px 0 0 6px;
-            background: #333;
-            color: #fff;
+            border-radius: 10px 0 0 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
             font-size: 14px;
+            outline: none;
         }
-        
+
         #botToken::placeholder {
-            color: #777;
+            color: rgba(255,255,255,0.6);
         }
-        
+
         #startBtn, #stopBtn {
             padding: 12px 20px;
             border: none;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s;
+            color: white;
         }
-        
+
         #startBtn {
-            background: #7289da;
-            color: white;
-            border-radius: 0 6px 6px 0;
+            background: rgba(114, 137, 218, 0.9);
+            border-radius: 0 10px 10px 0;
         }
-        
+
         #startBtn:hover {
-            background: #677bc4;
+            background: rgba(114, 137, 218, 1);
         }
-        
+
         #stopBtn {
-            background: #f04747;
-            color: white;
-            border-radius: 6px;
+            background: rgba(240, 71, 71, 0.9);
+            border-radius: 10px;
             margin-left: 10px;
         }
-        
+
         #stopBtn:hover {
-            background: #d84040;
+            background: rgba(240, 71, 71, 1);
         }
-        
+
         #status {
             margin-top: 15px;
             padding: 12px;
-            border-radius: 6px;
+            border-radius: 10px;
             display: none;
             text-align: center;
             font-weight: bold;
         }
-        
+
         .success {
-            background: #43b581;
+            background: rgba(67, 181, 129, 0.8);
         }
-        
+
         .error {
-            background: #f04747;
+            background: rgba(240, 71, 71, 0.8);
         }
-        
+
         .info {
-            background: #7289da;
+            background: rgba(114, 137, 218, 0.8);
         }
-        
+
         .instructions {
             margin-top: 25px;
             padding: 15px;
-            background: #333;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
         }
-        
+
         .instructions h2 {
-            color: #7289da;
+            color: #ffffff;
             font-size: 18px;
             margin-bottom: 10px;
         }
-        
+
         .instructions ol {
             padding-left: 20px;
             line-height: 1.6;
         }
-        
+
         .instructions li {
             margin-bottom: 8px;
         }
-        
+
         .instructions a {
-            color: #7289da;
+            color: #aab8ff;
             text-decoration: none;
         }
-        
+
         .instructions a:hover {
             text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .input-group {
+                flex-direction: column;
+            }
+            #botToken {
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+            #startBtn {
+                border-radius: 10px;
+            }
+            #stopBtn {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 DISCORD BOT VIP ACTIVATOR</h1>
-        
+        <h1>🚀 Discord Developer Badge</h1>
+
         <div class="input-group">
             <input type="text" id="botToken" placeholder="Вставь токен бота сюда">
             <button id="startBtn">ЗАПУСТИТЬ</button>
             <button id="stopBtn">ОСТАНОВИТЬ</button>
         </div>
-        
+
         <div id="status"></div>
-        
+
         <div class="instructions">
-            <h2>📌 Как получить значок Active Developer:</h2>
+            <h2>📌 Как правильно создать бота в Discord Portal:</h2>
             <ol>
-                <li>Создай бота на <a href="https://discord.com/developers/applications" target="_blank">Discord Dev Portal</a></li>
-                <li>Скопируй его токен (в разделе "Bot")</li>
-                <li>Вставь токен в поле выше и нажми "ЗАПУСТИТЬ"</li>
-                <li>На любом сервере с ботом напиши <strong>/db</strong></li>
-                <li>Через 24 часа проверь <a href="https://discord.com/developers/active-developer" target="_blank">Active Developer</a></li>
+                <li>Перейди на <a href="https://discord.com/developers/applications" target="_blank">Discord Developer Portal</a>.</li>
+                <li>Нажми "New Application", введи название и подтверди.</li>
+                <li>В разделе <strong>Bot</strong> нажми "Add Bot" и подтверди.</li>
+                <li>Скопируй токен бота (он нужен для подключения).</li>
+                <li>Вставь токен в поле выше и нажми <strong>ЗАПУСТИТЬ</strong>.</li>
+                <li>На сервере, куда добавлен бот, используй команду <strong>/db</strong>.</li>
+                <li>Через 24 часа проверь <a href="https://discord.com/developers/active-developer" target="_blank">страницу значка</a>.</li>
             </ol>
         </div>
+
+        <footer>by Aik Carroll</footer>
     </div>
 
     <script>

@@ -20,7 +20,6 @@
             align-items: center;
             padding: 20px;
             color: white;
-            backdrop-filter: blur(10px);
         }
 
         .container {
@@ -37,59 +36,58 @@
         }
 
         h1 {
-            color: #ffffff;
             text-align: center;
             margin-bottom: 20px;
             font-size: 24px;
         }
 
-        .input-group {
-            display: flex;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
         #botToken {
-            flex: 1;
+            width: 100%;
             padding: 12px;
             border: none;
-            border-radius: 10px 0 0 10px;
+            border-radius: 10px;
             background: rgba(255, 255, 255, 0.15);
             color: white;
             font-size: 14px;
             outline: none;
+            margin-bottom: 15px;
         }
 
         #botToken::placeholder {
             color: rgba(255,255,255,0.6);
         }
 
-        #startBtn, #stopBtn {
-            padding: 12px 20px;
+        .btn {
+            width: 100%;
+            padding: 12px;
             border: none;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s;
+            border-radius: 10px;
             color: white;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
         }
 
         #startBtn {
             background: rgba(114, 137, 218, 0.9);
-            border-radius: 0 10px 10px 0;
+            box-shadow: 0 0 10px rgba(114, 137, 218, 0.6);
         }
 
         #startBtn:hover {
             background: rgba(114, 137, 218, 1);
+            box-shadow: 0 0 20px rgba(114, 137, 218, 1);
         }
 
         #stopBtn {
             background: rgba(240, 71, 71, 0.9);
-            border-radius: 10px;
-            margin-left: 10px;
+            box-shadow: 0 0 10px rgba(240, 71, 71, 0.6);
         }
 
         #stopBtn:hover {
             background: rgba(240, 71, 71, 1);
+            box-shadow: 0 0 20px rgba(240, 71, 71, 1);
         }
 
         #status {
@@ -121,7 +119,6 @@
         }
 
         .instructions h2 {
-            color: #ffffff;
             font-size: 18px;
             margin-bottom: 10px;
         }
@@ -155,46 +152,30 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @media (max-width: 600px) {
-            .input-group {
-                flex-direction: column;
-            }
-            #botToken {
-                border-radius: 10px;
-                margin-bottom: 10px;
-            }
-            #startBtn {
-                border-radius: 10px;
-            }
-            #stopBtn {
-                margin-left: 0;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🚀 Discord Developer Badge</h1>
 
-        <div class="input-group">
-            <input type="text" id="botToken" placeholder="Вставь токен бота сюда">
-            <button id="startBtn">ЗАПУСТИТЬ</button>
-            <button id="stopBtn">ОСТАНОВИТЬ</button>
-        </div>
+        <input type="text" id="botToken" placeholder="Вставь токен бота сюда">
+        <button id="startBtn" class="btn">ЗАПУСТИТЬ</button>
+        <button id="stopBtn" class="btn">ОСТАНОВИТЬ</button>
 
         <div id="status"></div>
 
         <div class="instructions">
-            <h2>📌 Как правильно создать бота в Discord Portal:</h2>
+            <h2>📌 Как правильно получить Active Developer Badge:</h2>
             <ol>
-                <li>Перейди на <a href="https://discord.com/developers/applications" target="_blank">Discord Developer Portal</a>.</li>
-                <li>Нажми "New Application", введи название и подтверди.</li>
-                <li>В разделе <strong>Bot</strong> нажми "Add Bot" и подтверди.</li>
-                <li>Скопируй токен бота (он нужен для подключения).</li>
+                <li>Открой <a href="https://discord.com/developers/applications" target="_blank">Discord Developer Portal</a>.</li>
+                <li>Нажми <strong>New Application</strong>, введи имя и подтверди.</li>
+                <li>Перейди в раздел <strong>Bot</strong> → нажми <strong>Add Bot</strong>.</li>
+                <li>Включи все нужные <strong>Privileged Gateway Intents</strong>.</li>
+                <li>Скопируй токен бота.</li>
+                <li>Добавь бота на свой сервер через раздел <strong>OAuth2</strong> → URL Generator.</li>
                 <li>Вставь токен в поле выше и нажми <strong>ЗАПУСТИТЬ</strong>.</li>
-                <li>На сервере, куда добавлен бот, используй команду <strong>/db</strong>.</li>
-                <li>Через 24 часа проверь <a href="https://discord.com/developers/active-developer" target="_blank">страницу значка</a>.</li>
+                <li>На сервере используй команду <strong>/db</strong>.</li>
+                <li>Через 24 часа зайди на <a href="https://discord.com/developers/active-developer" target="_blank">страницу значка</a> и активируй бейдж.</li>
             </ol>
         </div>
 

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISCORD BOT VIP ACTIVATOR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: #2b2b2b;
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+        }
+        
+        h1 {
+            color: #7289da;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .input-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        #botToken {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px 0 0 6px;
+            background: #333;
+            color: #fff;
+            font-size: 14px;
+        }
+        
+        #botToken::placeholder {
+            color: #777;
+        }
+        
+        #startBtn, #stopBtn {
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        #startBtn {
+            background: #7289da;
+            color: white;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        #startBtn:hover {
+            background: #677bc4;
+        }
+        
+        #stopBtn {
+            background: #f04747;
+            color: white;
+            border-radius: 6px;
+            margin-left: 10px;
+        }
+        
+        #stopBtn:hover {
+            background: #d84040;
+        }
+        
+        #status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .success {
+            background: #43b581;
+        }
+        
+        .error {
+            background: #f04747;
+        }
+        
+        .info {
+            background: #7289da;
+        }
+        
+        .instructions {
+            margin-top: 25px;
+            padding: 15px;
+            background: #333;
+            border-radius: 8px;
+        }
+        
+        .instructions h2 {
+            color: #7289da;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .instructions a {
+            color: #7289da;
+            text-decoration: none;
+        }
+        
+        .instructions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 DISCORD BOT VIP ACTIVATOR</h1>
+        
+        <div class="input-group">
+            <input type="text" id="botToken" placeholder="Вставь токен бота сюда">
+            <button id="startBtn">ЗАПУСТИТЬ</button>
+            <button id="stopBtn">ОСТАНОВИТЬ</button>
+        </div>
+        
+        <div id="status"></div>
+        
+        <div class="instructions">
+            <h2>📌 Как получить значок Active Developer:</h2>
+            <ol>
+                <li>Создай бота на <a href="https://discord.com/developers/applications" target="_blank">Discord Dev Portal</a></li>
+                <li>Скопируй его токен (в разделе "Bot")</li>
+                <li>Вставь токен в поле выше и нажми "ЗАПУСТИТЬ"</li>
+                <li>На любом сервере с ботом напиши <strong>/db</strong></li>
+                <li>Через 24 часа проверь <a href="https://discord.com/developers/active-developer" target="_blank">Active Developer</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const botToken = document.getElementById('botToken');
+        const statusDiv = document.getElementById('status');
+        
+        let socket;
+        
+        function connectWebSocket() {
+            socket = new WebSocket('ws://ТВОЙ_IP_НОУТБУКА:3000');
+            
+            socket.onopen = () => {
+                showStatus('✅ Подключено к серверу', 'success');
+            };
+            
+            socket.onerror = () => {
+                showStatus('❌ Ошибка подключения', 'error');
+            };
+            
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                showStatus(data.message, data.status);
+            };
+        }
+        
+        startBtn.addEventListener('click', () => {
+            if (!botToken.value) {
+                showStatus('❌ Введи токен бота!', 'error');
+                return;
+            }
+            
+            if (!socket || socket.readyState !== WebSocket.OPEN) {
+                showStatus('⌛ Подключаемся...', 'info');
+                connectWebSocket();
+                
+                setTimeout(() => {
+                    if (socket.readyState === WebSocket.OPEN) {
+                        socket.send(JSON.stringify({ action: 'start', token: botToken.value }));
+                    } else {
+                        showStatus('❌ Не удалось подключиться', 'error');
+                    }
+                }, 1000);
+            } else {
+                socket.send(JSON.stringify({ action: 'start', token: botToken.value }));
+            }
+        });
+        
+        stopBtn.addEventListener('click', () => {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify({ action: 'stop' }));
+            } else {
+                showStatus('❌ Нет подключения', 'error');
+            }
+        });
+        
+        function showStatus(message, type) {
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+            statusDiv.className = type;
+        }
+        
+        connectWebSocket();
+    </script>
+</body>
+</html>

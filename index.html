@@ -191,7 +191,7 @@
         let socket;
         
         function connectWebSocket() {
-            socket = new WebSocket('wss://46.200.142.43:3000');
+            socket = new WebSocket('ws://localhost:3000');
             
             socket.onopen = () => {
                 showStatus('✅ Подключено к серверу', 'success');
